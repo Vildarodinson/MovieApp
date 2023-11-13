@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Input from "@/components/Input";
 import axios from "axios";
@@ -19,20 +19,27 @@ const Auth = () => {
     );
   }, []);
 
-  const Login = useCallback(async () => {
-    try {
-      await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-        callbackUrl: "/",
-      });
+const Login = useCallback(async () => {
+  try {
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+      callbackUrl: "/Auth",
+    });
 
+    if (!result?.error) {
       router.push("/");
-    } catch (error) {
-      console.log(error);
+    } else {
+      console.log("Authentication failed:", result.error);
+      alert("Incorrect email or password. Please try again.");
     }
-  }, [email, password]);
+  } catch (error) {
+    console.log("Unexpected error during authentication:", error);
+    alert("An unexpected error occurred. Please try again later.");
+  }
+}, [email, password]);
+
 
   const register = useCallback(async () => {
     try {
@@ -103,7 +110,6 @@ const Auth = () => {
               <span onClick={toggleAuth} className="text-blue-400">
                 {auth === "Login" ? "Signup" : "Login"}
               </span>
-              
             </p>
           </div>
         </div>
