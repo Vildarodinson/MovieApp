@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useCallback } from "react";
 import { useRouter } from "next/router";
-import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
+import { BsChevronDown, BsPlayFill } from "react-icons/bs";
+import FavoriteButton from "./FavoriteButton";
+
 
 
 interface MovieCardProps {
@@ -45,7 +47,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         w-full
         scale-0
         group-hover:scale-110
-        group-hover:-translate-y-[6vw]
+        group-hover:-translate-y-[8vw]
         group-hover:translate-x-[2vw]
         group-hover:opacity-100
       "
@@ -79,8 +81,14 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           "
         >
           <div className="flex flex-row items-center gap-3">
-            <div className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center items-center transition hover:bg-neutral-300"></div>
-            <div className="cursor-pointer ml-auto group/item w-6 h-6 lg:w-10 lg:h-10 border-white border-2 rounded-full flex justify-center items-center transition hover:border-neutral-300">
+            <div className="cursor-pointer w-6 h-6 lg:w-10 lg:h-10 bg-white rounded-full flex justify-center items-center transition hover:bg-neutral-300">
+              <BsPlayFill className="text-black w-4 lg:w-10" />
+            </div>
+            <FavoriteButton movieId={data?.id} />
+            <div
+              onClick={() => {}}
+              className="cursor-pointer ml-auto group/item w-6 h-6 lg:w-10 lg:h-10 border-white border-2 rounded-full flex justify-center items-center transition hover:border-neutral-300"
+            >
               <BsChevronDown className="text-white group-hover/item:text-neutral-300 w-4 lg:w-6" />
             </div>
           </div>
